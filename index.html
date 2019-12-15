@@ -1,0 +1,57 @@
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript">
+
+fetch('https://sutka-caf53.firebaseio.com/users/obsazenost.json')
+  .then(response => response.json())
+  .then(dataS => {
+
+	var ctx = document.getElementById('myChart').getContext('2d');
+
+	const sortedData = Object.entries(dataS).sort((a,b) => a[0][1] - b[0][1]);
+
+	var labels = [];
+	sortedData.forEach(function(item){
+	  labels.push(new Date(item[1]['timestamp']*1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}));
+	});
+
+	var bazen = [];
+	sortedData.forEach(function(item){
+	  bazen.push({ x: new Date(item[1]['timestamp']*1000), y: item[1]['bazen']});
+	});
+
+	var aquapark = [];
+	sortedData.forEach(function(item){
+	  aquapark.push(item[1]['aquapark']);
+	});
+
+	var chart = new Chart(ctx, {
+	    // The type of chart we want to create
+	    type: 'line',
+	    // The data for our dataset
+	    data: {
+	        labels,
+	        datasets: [{
+	            label: 'Bazen',
+	            borderColor: 'rgb(255, 99, 132)',
+	            data: bazen
+	        },
+	        {
+	            label: 'Aquapark',
+	            borderColor: 'rgb(25, 9, 12)',
+	            data: aquapark
+	        }]
+	    },
+	   	options: {
+		    scales: {
+		        yAxes: [{
+		            ticks: {
+		                beginAtZero: true
+		            }
+		        }]
+		    }
+		}
+	});
+ })
+
+</script>
