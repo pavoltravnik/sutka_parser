@@ -1,7 +1,7 @@
 # sutka_parser
 
 
-Statistics is accessible on (https://pavoltravnik.github.io/sutka_parser/)[https://pavoltravnik.github.io/sutka_parser/]
+Statistics is accessible on [https://pavoltravnik.github.io/sutka_parser/](https://pavoltravnik.github.io/sutka_parser/)
 
 
 create file sutka.sh
